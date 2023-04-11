@@ -18,7 +18,7 @@ class UserService {
     this.users.delete(login);
   }
 
-  validateLogin(login) {
+  validarLogin(login) {
     if (!login || login === "") {
       return "Login não pode ser vazio.";
     }
@@ -34,7 +34,7 @@ class UserService {
     return null;
   }
 
-  validatePassword(senha) {
+  validarSenha(senha) {
     if (!senha || senha === "") {
       return "Senha não pode ser vazia.";
     }

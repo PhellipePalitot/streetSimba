@@ -2,14 +2,14 @@ import userService from "../services/userService.js";
 
 
 class UserController {
-  addUser(login, password, role) {
-    const validationError = userService.validateLogin(login) || userService.validatePassword(password);
+  addUser(login, senha, tipo) {
+    const verificaErro = userService.validarLogin(login) || userService.validarSenha(senha);
 
-    if (validationError) {
-      throw new Error(validationError);
+    if (verificaErro) {
+      throw new Error(verificaErro);
     }
 
-    userService.addUser(login, password, role);
+    userService.addUser(login, senha, tipo);
   }
 
   getAllUsers() {
