@@ -1,8 +1,8 @@
 class User {
-    constructor(login, password, role) {
+    constructor(login, senha, tipo) {
       this.login = login;
-      this.password = password;
-      this.role = role;
+      this.senha = senha;
+      this.tipo = tipo;
     }
   }
 

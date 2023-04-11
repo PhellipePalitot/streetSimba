@@ -3,8 +3,8 @@ import UserController from "./controllers/userController.js";
 
 function App() {
   const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user");
+  const [senha, setPassword] = useState("");
+  const [tipo, setTipo] = useState("Usuário");
   const [users, setUsers] = useState(UserController.getAllUsers());
 
   function handleLoginChange(event) {
@@ -15,19 +15,19 @@ function App() {
     setPassword(event.target.value);
   }
 
-  function handleRoleChange(event) {
-    setRole(event.target.value);
+  function handleTipoChange(event) {
+    setTipo(event.target.value);
   }
 
   function handleAddUser(event) {
     event.preventDefault();
 
     try {
-      UserController.addUser(login, password, role);
+      UserController.addUser(login, senha, tipo);
       setUsers(UserController.getAllUsers());
       setLogin("");
       setPassword("");
-      setRole("user");
+      setTipo("Usuário");
     } catch (error) {
       alert(error.message);
     }
@@ -41,13 +41,13 @@ function App() {
           <input type="text" id="login" value={login} onChange={handleLoginChange} />
         </div>
         <div>
-          <label htmlFor="password">Senha:</label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+          <label htmlFor="senha">Senha:</label>
+          <input type="password" id="senha" value={senha} onChange={handlePasswordChange} />
         </div>
         <div>
-          <label htmlFor="role">Tipo de usuário:</label>
-          <select id="role" value={role} onChange={handleRoleChange}>
-            <option value="user">Usuário comum</option>
+          <label htmlFor="tipo">Tipo de usuário:</label>
+          <select id="tipo" value={tipo} onChange={handleTipoChange}>
+            <option value="Usuário">Usuário</option>
             <option value="admin">Administrador</option>
           </select>
         </div>
@@ -58,7 +58,7 @@ function App() {
       <ul>
         {users.map((user, index) => (
           <li key={index}>
-            Login: {user.login} - Senha: {user.password} - Tipo: {user.role}
+            Login: {user.login} - Senha: {user.senha} - Tipo: {user.tipo}
           </li>
         ))}
       </ul>
