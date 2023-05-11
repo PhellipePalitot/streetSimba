@@ -1,9 +1,9 @@
 class Ocurrence {
-  constructor(local, time, date, description){
+  constructor(local, horario, data, descricao){
     this.local = local
-    this.time = time
-    this.date = date
-    this.description = description
+    this.horario = horario
+    this.data = data
+    this.descricao = descricao
   }
 }
 
