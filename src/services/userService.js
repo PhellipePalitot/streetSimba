@@ -2,7 +2,14 @@ import User from "../models/user";
 
 class UserService {
   constructor() {
+    //Garante que a classe seja chamada apenas uma vez (Padrao Singleton, apenas uma instancia pode ser criada)
+    if(UserService.users)
+      return UserService.users;
+
     this.users = new Map();
+    UserService.users = this;
+    return this;
+
   }
 
   getAllUsers() {
