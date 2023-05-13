@@ -2,14 +2,22 @@ import User from "../models/user";
 
 class UserService {
   constructor() {
-    //Garante que a classe seja chamada apenas uma vez (Padrao Singleton, apenas uma instancia pode ser criada)
-    if(UserService.users)
-      return UserService.users;
-
+  
     this.users = new Map();
-    UserService.users = this;
-    return this;
+  }
 
+  signIn(login, senha, role){
+    
+      Array.from(this.users.values()).forEach((user)=>{
+      console.log(this.users.values()[1])
+      if (user.login === login && user.senha === senha && user.tipo === role){
+        user.logged = true;
+        console.log(user)
+        return user;
+      }
+    });
+
+    return "Você ainda não é cadastrado(a)!";
   }
 
   getAllUsers() {
@@ -27,6 +35,7 @@ class UserService {
 
   validarLogin(login) {
     if (!login || login === "") {
+      console.log("Resultado: " + login)
       return "Login não pode ser vazio.";
     }
 
