@@ -21,8 +21,8 @@ class OcurrenceService {
     return Array.from(this.Ocurrencelist);
   }
 
-  addOcurrence(local, horario, data, descricao){
-    const ocurrence = new Ocurrence(local, horario, data, descricao)
+  addOcurrence(autor, local, horario, data, descricao){
+    const ocurrence = new Ocurrence(autor, local, horario, data, descricao)
     this.ocurrence.add(ocurrence);
   }
 
