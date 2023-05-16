@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import LoginPage from "./views/loginPage/index.js";
+import SinglePage from "./views/facade/sigletonPage";
 
 
 class App extends Component {
   render() {
     return (
       <div>
-      <h1>Street Simba</h1>
-      <LoginPage />
+      
+       {SinglePage.renderPage()}
+        
       </div>
     )
   }

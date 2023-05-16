@@ -9,7 +9,7 @@ class UserService {
   signIn(login, senha, role){
     
       Array.from(this.users.values()).forEach((user)=>{
-      console.log(this.users.values()[1])
+      console.log(this.users.values())
       if (user.login === login && user.senha === senha && user.tipo === role){
         user.logged = true;
         console.log(user)

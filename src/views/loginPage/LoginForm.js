@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Navigate, Router } from "react-router-dom";
 import userController from "../../controllers/userController.js";
 
 class LoginForm extends Component{
@@ -6,7 +7,6 @@ class LoginForm extends Component{
   constructor(props){
     super(props);
     this.state = {login: "", senha: "", tipo: "", loggedIn: false}
-  
   }  
 
   handleLoginChange = event =>{
@@ -24,8 +24,9 @@ class LoginForm extends Component{
   handleSignIn = event => {
     event.preventDefault();
     
-    if (this.loggedIn === false)
-      userController.signInUser(this.login, this.senha, this.tipo);
+    if (this.state.loggedIn === false)
+      this.setState({ loggedIn: true });
+      userController.signInUser(this.state.login, this.state.senha, this.state.tipo);
   }
 
   handleAddUser = event => {
@@ -42,7 +43,17 @@ class LoginForm extends Component{
 
 
   render(){
-    const { login, senha, tipo } = this.state;
+
+    const { login, senha, tipo, loggedIn } = this.state;
+
+    if (loggedIn === true){
+      return(
+        <Router>
+          <Navigate to="/welcome"/>;  
+        </Router>
+      )
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSignIn}>
@@ -70,5 +81,3 @@ class LoginForm extends Component{
 }
 
 export default LoginForm;
-  
-  
