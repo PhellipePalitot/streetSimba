@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SinglePage from "./views/facade/sigletonPage";
+import SinglePage from "./views/singlePage/siglePage";
 
 
 class App extends Component {

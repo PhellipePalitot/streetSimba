@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import OcurrenceController from "../../controllers/ocurrenceController"
-
+import ControllerFacade from "../facade/controllerFacade";
 class OcurrenceForm extends Component{
   
   constructor(props){
@@ -32,11 +31,11 @@ class OcurrenceForm extends Component{
     event.preventDefault();
     const { autor, local, horario, data, descricao } = this.state;
     
-    OcurrenceController.addOcurrence(autor, local, horario, data, descricao);
+    ControllerFacade.addOcurrence(autor, local, horario, data, descricao);
   }
 
   handleListOcurrence = event =>{
-    const ocurList = OcurrenceController.getAllOcurrences();
+    const ocurList = ControllerFacade.getAllOcurrences();
     return ocurList;
   }
 

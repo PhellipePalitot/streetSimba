@@ -17,6 +17,7 @@ class OcurrenceController {
   deleteOcurrence(ocurrence){
     OcurrenceService.deleteOcurrence(ocurrence);
   }
+  
 }
 
 export default new OcurrenceController()

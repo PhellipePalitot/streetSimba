@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Navigate, Router } from "react-router-dom";
-import userController from "../../controllers/userController.js";
+import ControllerFacade from "../facade/controllerFacade";
 
 class LoginForm extends Component{
 
@@ -26,7 +26,7 @@ class LoginForm extends Component{
     
     if (this.state.loggedIn === false)
       this.setState({ loggedIn: true });
-      userController.signInUser(this.state.login, this.state.senha, this.state.tipo);
+      ControllerFacade.signInUser(this.state.login, this.state.senha, this.state.tipo);
   }
 
   handleAddUser = event => {
@@ -34,7 +34,7 @@ class LoginForm extends Component{
     const { login, senha, tipo } = this.state;
     
     try{
-      userController.addUser(login, senha, tipo);
+      ControllerFacade.addUser(login, senha, tipo);
     
     }catch(error){
       console.error(error.message);
