@@ -21,7 +21,7 @@ class ControllerFacade {
 
   signInUser(login, senha, tipo){
       
-    UserController.signInUser(login, senha, tipo);
+    return UserController.signInUser(login, senha, tipo);
   }
 
   addUser(login, senha, tipo) {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import controllerFacade from "../facade/controllerFacade";
 import ControllerFacade from "../facade/controllerFacade";
 class OcurrenceForm extends Component{
   
@@ -29,20 +30,27 @@ class OcurrenceForm extends Component{
 
   handleAddOcurrence =  event => {
     event.preventDefault();
-    const { autor, local, horario, data, descricao } = this.state;
+    const { autor, local, horario, data, descricao} = this.state;
     
     ControllerFacade.addOcurrence(autor, local, horario, data, descricao);
+    console.log(controllerFacade.getAllOcurrences())
   }
 
-  handleListOcurrence = event =>{
-    const ocurList = ControllerFacade.getAllOcurrences();
-    return ocurList;
-  }
+  /*handleListOcurrence(){
+    
+    const ocurList = this.state;
+    ocurList = ControllerFacade.getAllOcurrences();
+
+    ocurList.map((index, ocu) => {
+      return (<li key={index}> Ocorrência: {ocur.descricao} - Local: {ocur.local} - Data: {ocur.data} - Horário: {ocur.horario}</li>)
+    }
+  }*/
+  
+ 
 
   render(){
-    const { autor, local, horario, data, descricao } = this.state;
-    let ocurList = this.handleListOcurrence();
-
+    const { autor, local, horario, data, descricao} = this.state;
+    
     return (
       <div>
         <form onSubmit={this.handleAddOcurrence}>
@@ -72,13 +80,7 @@ class OcurrenceForm extends Component{
       
         <hr />
         <h2> Lista de Ocorrências: </h2>
-        <ul>
-          {ocurList.map((ocur, index) => (
-            <li key={index}>
-              Ocorrência: {ocur.descricao} - Local: {ocur.local} - Data: {ocur.data} - Horário: {ocur.horario}
-            </li>
-          ))}
-        </ul>
+        <ul>{this.handleListOcurrence}</ul>
         
       </div>
     );

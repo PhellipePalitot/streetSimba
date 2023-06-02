@@ -1,4 +1,5 @@
 import Ocurrence from "../models/ocurrence";
+import { v4 as uuidv4 } from 'uuid';
 class OcurrenceService {
 
   constructor(){
@@ -16,7 +17,7 @@ class OcurrenceService {
 
   addOcurrence(autor, local, horario, data, descricao){
     const ocurrence = new Ocurrence(autor, local, horario, data, descricao)
-    this.Ocurrencelist.set(ocurrence);
+    this.Ocurrencelist.set(uuidv4(), ocurrence);
   }
 
   deleteOcurrence(ocurrence){
