@@ -2,21 +2,18 @@ import User from "../models/user";
 
 class UserService {
   constructor() {
-  
     this.users = new Map();
   }
 
-  signIn(login, senha, role){
-    
-      Array.from(this.users.values()).forEach((user)=>{
-      console.log(this.users.values())
-      if (user.login === login && user.senha === senha && user.tipo === role){
+  signIn(login, senha, role) {
+    const usersArray = Array.from(this.users.values());
+    for (let i = 0; i < usersArray.length; i++) {
+      const user = usersArray[i];
+      if (user.login === login && user.senha === senha && user.tipo === role) {
         user.logged = true;
-        console.log(user)
-        return user;
+        return user; // Retorna o usuário encontrado
       }
-    });
-
+    }
     return "Você ainda não é cadastrado(a)!";
   }
 
@@ -35,7 +32,7 @@ class UserService {
 
   validarLogin(login) {
     if (!login || login === "") {
-      console.log("Resultado: " + login)
+      console.log("Resultado: " + login);
       return "Login não pode ser vazio.";
     }
 
