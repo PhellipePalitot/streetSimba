@@ -33,6 +33,9 @@ class ControllerFacade {
     return UserController.getAllUsers();
   }
 
+  executeCommand(command) {
+    command.execute();
+  }
 }
 
 export default new ControllerFacade();
