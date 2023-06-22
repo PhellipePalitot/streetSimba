@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button, DatePicker, TimePicker, List, Popconfirm } from "antd";
 import ControllerFacade from "../facade/controllerFacade";
-import AddOcurrenceCommandService from "../../services/AddOcurrenceCommandService";
-import DeleteOcurrenceCommandService from "../../services/DeleteOcurrenceCommandService";
+import CommandFactory from "../../services/commandFactoryService";
 
 const { TextArea } = Input;
 
@@ -15,16 +14,16 @@ class OcurrenceForm extends Component {
 
   handleAddOcurrence = (values) => {
     const { autor, local, horario, data, descricao } = values;
-    const command = new AddOcurrenceCommandService(autor, local, horario.format("HH:mm"), data.format("YYYY-MM-DD"), descricao);
-    ControllerFacade.executeCommand(command);
+    const addOcurrenceCommand = CommandFactory.createAddOcurrenceCommand(autor, local, horario.format("HH:mm"), data.format("YYYY-MM-DD"), descricao);
+    ControllerFacade.executeCommand(addOcurrenceCommand);
     this.formRef.current.resetFields();
     const ocurrences = ControllerFacade.getAllOcurrences();
     this.setState({ ocurrences });
   };
 
   handleRemoveOcurrence = (ocurrence) => {
-    const command = new DeleteOcurrenceCommandService(ocurrence);
-    ControllerFacade.executeCommand(command);
+    const deleteOcurrenceCommand = CommandFactory.createDeleteOcurrenceCommand(ocurrence);
+    ControllerFacade.executeCommand(deleteOcurrenceCommand);
     const ocurrences = ControllerFacade.getAllOcurrences();
     this.setState({ ocurrences });
   };
