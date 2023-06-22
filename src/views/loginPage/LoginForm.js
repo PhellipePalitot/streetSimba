@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Navigate } from "react-router-dom";
-import { Form, Input, Button, Select, Col, Row } from "antd";
+import { Form, Input, Button, Select, Row } from "antd";
 import ControllerFacade from "../facade/controllerFacade";
-import logo from "../../logo.png"
+import logo from "../../logo.png";
 import UserAuthAdapter from "../../services/UserAuthAdapterService";
 const { Option } = Select;
 
@@ -31,8 +30,7 @@ class LoginForm extends Component {
 
   handleSignIn = async (values) => {
     const { login, senha, tipo } = this.state;
-    const validarLogin = await this.UserAuthAdapter.signIn(login, senha, tipo);
-
+    const validarLogin = await this.userAuthAdapter.signIn(login, senha, tipo);
 
     if (validarLogin === "logado") {
       this.setState({ loggedIn: true });
@@ -70,8 +68,14 @@ class LoginForm extends Component {
           initialValues={{ tipo: "user" }}
           style={{ maxWidth: "300px" }}
         >
-          <Row style={{ textAlign: "center", marginLeft: "30px", marginBottom: "-30px"}}>
-          <div>
+          <Row
+            style={{
+              textAlign: "center",
+              marginLeft: "30px",
+              marginBottom: "-30px",
+            }}
+          >
+            <div>
               <img
                 style={{ width: "200px" }}
                 src={logo}
