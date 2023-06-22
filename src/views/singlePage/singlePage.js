@@ -13,8 +13,8 @@ class SinglePage {
     const url = window.location.pathname;
     console.log("URL:" + url);
     if (url === "/"){
-      //return this.WelcomePage.render();
-      return this.LoginPage.render();
+      return this.WelcomePage.render();
+      //return this.LoginPage.render();
     }else if (url === "/welcome"){
       
       return this.WelcomePage.render();
@@ -24,6 +24,7 @@ class SinglePage {
     }
 
   }
+  
 }
 
 const instance = new SinglePage();

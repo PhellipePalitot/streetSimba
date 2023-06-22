@@ -4,9 +4,11 @@ import { Form, Input, Button, Select, Col, Row } from "antd";
 import ControllerFacade from "../facade/controllerFacade";
 import logo from "../../logo.png"
 import UserAuthAdapter from "../../services/UserAuthAdapterService";
+import AbstractLayout from "../template/abstractLayout";
+
 const { Option } = Select;
 
-class LoginForm extends Component {
+class LoginForm extends AbstractLayout {
   constructor(props) {
     super(props);
     this.state = { login: "", senha: "", tipo: "user", loggedIn: false };
