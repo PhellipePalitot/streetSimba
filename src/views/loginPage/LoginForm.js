@@ -45,7 +45,7 @@ class LoginForm extends Component {
     } catch (error) {
       console.error(error.message);
     }
-  };
+  }
 
   render() {
     const { login, senha, tipo, loggedIn } = this.state;
