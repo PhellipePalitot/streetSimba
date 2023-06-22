@@ -3,12 +3,14 @@ import { Navigate } from "react-router-dom";
 import { Form, Input, Button, Select, Col, Row } from "antd";
 import ControllerFacade from "../facade/controllerFacade";
 import logo from "../../logo.png"
+import UserAuthAdapter from "../../services/UserAuthAdapterService";
 const { Option } = Select;
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = { login: "", senha: "", tipo: "user", loggedIn: false };
+    this.userAuthAdapter = new UserAuthAdapter(ControllerFacade);
   }
 
   handleLoginChange = (event) => {
@@ -29,7 +31,8 @@ class LoginForm extends Component {
 
   handleSignIn = async (values) => {
     const { login, senha, tipo } = this.state;
-    const validarLogin = await ControllerFacade.signInUser(login, senha, tipo);
+    const validarLogin = await this.UserAuthAdapter.signIn(login, senha, tipo);
+
 
     if (validarLogin === "logado") {
       this.setState({ loggedIn: true });
@@ -40,7 +43,7 @@ class LoginForm extends Component {
     const { login, senha, tipo } = this.state;
 
     try {
-      await ControllerFacade.addUser(login, senha, tipo);
+      await this.userAuthAdapter.addUser(login, senha, tipo);
     } catch (error) {
       console.error(error.message);
     }
