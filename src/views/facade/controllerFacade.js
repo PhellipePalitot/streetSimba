@@ -1,32 +1,39 @@
 import UserController from "../../controllers/userController";
+import AdminController from "../../controllers/adminController";
 import OcurrenceController from "../../controllers/ocurrenceController";
 
 class ControllerFacade {
-
-  getAllOcurrences(){
+  getAllOcurrences() {
     return OcurrenceController.getAllOcurrences();
   }
 
-  getOcurrence(ocurrence){
+  getOcurrence(ocurrence) {
     return OcurrenceController.getOcurrence(ocurrence);
   }
 
-  addOcurrence(autor, local, horario, data, descricao){
+  addOcurrence(autor, local, horario, data, descricao) {
     OcurrenceController.addOcurrence(autor, local, horario, data, descricao);
   }
 
-  deleteOcurrence(ocurrence){
+  deleteOcurrence(ocurrence) {
     OcurrenceController.deleteOcurrence(ocurrence);
   }
 
-  signInUser(login, senha, tipo){
-      
-    return UserController.signInUser(login, senha, tipo);
+  signInUser(login, senha, tipo) {
+      return UserController.signInUser(login, senha, tipo);
   }
 
   addUser(login, senha, tipo) {
-    
-    UserController.addUser(login, senha, tipo);
+      UserController.addUser(login, senha, tipo);
+
+  }
+
+  signInAdmin(login, senha) {
+      return AdminController.signInAdmin(login, senha);
+  }
+
+  addAdmin(login, senha) {
+      AdminController.addAdmin(login, senha);
   }
 
   getAllUsers() {

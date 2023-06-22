@@ -1,4 +1,4 @@
-import ocurrenceController from "../controllers/ocurrenceController";
+import controllerFacade from "../views/facade/controllerFacade";
 
 class DeleteOcurrenceCommand {
     constructor(ocurrence) {
@@ -8,7 +8,7 @@ class DeleteOcurrenceCommand {
     execute() {
       // Lógica para excluir a ocorrência usando o objeto de ocorrência armazenado no atributo da classe
       // Chamadas ao OcurrenceController ou a outras classes relevantes podem ser feitas aqui
-      ocurrenceController.deleteOcurrence(this.ocurrence);
+      controllerFacade.deleteOcurrence(this.ocurrence);
     }
   }
 
