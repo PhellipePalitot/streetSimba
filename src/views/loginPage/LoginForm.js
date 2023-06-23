@@ -29,6 +29,18 @@ class LoginForm extends AbstractLayout {
     window.location.href = url;
   };
 
+  handleRecoverPassword = async () => {
+    const { login, tipo } = this.state;
+
+    try {
+      await this.userAuthAdapter.recoverPassword(login, tipo);
+      // Exibir uma mensagem de sucesso para o usuário informando que as instruções de recuperação de senha foram enviadas
+    } catch (error) {
+      console.error(error.message);
+      // Exibir uma mensagem de erro para o usuário informando que ocorreu um erro ao tentar recuperar a senha
+    }
+  };
+
   handleSignIn = async (values) => {
     const { login, senha, tipo } = this.state;
     const validarLogin = await this.userAuthAdapter.signIn(login, senha, tipo);
@@ -36,8 +48,8 @@ class LoginForm extends AbstractLayout {
     if (validarLogin === "logado") {
       this.setState({ loggedIn: true });
 
-      localStorage.setItem('user', login);
-      localStorage.setItem('role', tipo);
+      localStorage.setItem("user", login);
+      localStorage.setItem("role", tipo);
     }
   };
 
@@ -49,7 +61,7 @@ class LoginForm extends AbstractLayout {
     } catch (error) {
       console.error(error.message);
     }
-  }
+  };
 
   render() {
     const { login, senha, tipo, loggedIn } = this.state;
@@ -151,6 +163,11 @@ class LoginForm extends AbstractLayout {
             </Button>
             <Button onClick={this.handleAddUser} name="Cadastro">
               Cadastre-se
+            </Button>
+          </Form.Item>
+          <Form.Item>
+            <Button onClick={this.handleRecoverPassword}>
+              Esqueci minha senha
             </Button>
           </Form.Item>
         </Form>

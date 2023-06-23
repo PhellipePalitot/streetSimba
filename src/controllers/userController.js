@@ -49,6 +49,12 @@ class UserController {
   getAllUsers() {
     return userService.getAllUsers();
   }
+
+  recoverPassword() {
+    notification.info({
+      message: "Passo para recuperar senha mandada para o email",
+    });
+  }
 }
 
 export default new UserController();

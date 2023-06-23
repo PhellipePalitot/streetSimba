@@ -28,12 +28,20 @@ class ControllerFacade {
 
   }
 
+  userRecoverPassword(login) {
+    UserController.recoverPassword(login);
+  }
+
   signInAdmin(login, senha) {
       return AdminController.signInAdmin(login, senha);
   }
 
   addAdmin(login, senha) {
       AdminController.addAdmin(login, senha);
+  }
+
+  adminRecoverPassword(login) {
+    AdminController.recoverPassword(login);
   }
 
   getAllUsers() {

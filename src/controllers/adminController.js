@@ -47,6 +47,12 @@ class AdminController {
   getAllAdmins() {
     return adminService.getAllUsers().filter((user) => user.tipo === "admin");
   }
+
+  recoverPassword() {
+    notification.info({
+      message: "Passo para recuperar senha mandada para o email",
+    });
+  }
 }
 
 export default new AdminController();

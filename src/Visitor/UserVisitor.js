@@ -8,4 +8,9 @@ export default class UserVisitor extends Visitor {
     async addUser(login, senha) {
       this.controllerFacade.addUser(login, senha, "user");
     }
+
+    async recoverPassword(login, senha) {
+        this.controllerFacade.userRecoverPassword(login, senha, "admin");
+      }
+    
   }

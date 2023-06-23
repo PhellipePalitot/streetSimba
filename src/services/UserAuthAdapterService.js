@@ -17,6 +17,11 @@ class UserAuthAdapter {
     return visitor.addUser(login, senha);
   }
 
+  async recoverPassword(login, tipo) {
+    const visitor = this.createVisitor(tipo);
+    return visitor.recoverPassword(login);
+  }
+
   createVisitor(tipo) {
     switch (tipo) {
       case "admin":

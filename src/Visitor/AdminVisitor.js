@@ -9,4 +9,8 @@ export default class AdminVisitor extends Visitor {
     this.controllerFacade.addAdmin(login, senha, "admin");
   }
 
+  async recoverPassword(login, senha) {
+    this.controllerFacade.adminRecoverPassword(login, senha, "admin");
+  }
+
 }
