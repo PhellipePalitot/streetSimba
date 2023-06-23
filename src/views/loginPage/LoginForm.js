@@ -53,7 +53,7 @@ class LoginForm extends AbstractLayout {
     const { login, senha, tipo, loggedIn } = this.state;
 
     if (loggedIn === true) {
-      this.redirectTo("http://localhost:3000/welcome");
+      this.redirectTo("/welcome");
     }
 
     return (
