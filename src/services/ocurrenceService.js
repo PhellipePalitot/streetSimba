@@ -21,7 +21,7 @@ class OcurrenceService {
   }
 
   deleteOcurrence(ocurrence) {
-    const keyToDelete = Array.from(this.Ocurrencelist.keys()).find(key => this.Ocurrencelist.get(key) === ocurrence);
+    const keyToDelete = Array.from(this.Ocurrencelist.keys()).find(key => this.Ocurrencelist.get(key) == ocurrence);
     if (keyToDelete) {
       this.Ocurrencelist.delete(keyToDelete);
     }

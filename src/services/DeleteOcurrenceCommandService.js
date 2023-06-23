@@ -1,15 +1,14 @@
-import controllerFacade from "../views/facade/controllerFacade";
+import Command from "./command.js";
 
-class DeleteOcurrenceCommand {
-    constructor(ocurrence) {
-      this.ocurrence = ocurrence;
-    }
-  
-    execute() {
-      // Lógica para excluir a ocorrência usando o objeto de ocorrência armazenado no atributo da classe
-      // Chamadas ao OcurrenceController ou a outras classes relevantes podem ser feitas aqui
-      controllerFacade.deleteOcurrence(this.ocurrence);
-    }
+class DeleteOcurrenceCommand extends Command {
+  constructor(ocurrence, controllerFacade) {
+    super(controllerFacade);
+    this.ocurrence = ocurrence;
   }
+
+  execute() {
+    this.controllerFacade.deleteOcurrence(this.ocurrence);
+  }
+}
 
 export default DeleteOcurrenceCommand;

@@ -14,19 +14,28 @@ class OcurrenceForm extends Component {
 
   handleAddOcurrence = (values) => {
     const { autor, local, horario, data, descricao } = values;
-    const addOcurrenceCommand = CommandFactory.createAddOcurrenceCommand(autor, local, horario.format("HH:mm"), data.format("YYYY-MM-DD"), descricao);
-    Proxy.executeCommand(addOcurrenceCommand);
+    const addOcurrenceCommand = CommandFactory.createAddOcurrenceCommand(
+      autor,
+      local,
+      horario.format("HH:mm"),
+      data.format("YYYY-MM-DD"),
+      descricao
+    );
+    addOcurrenceCommand.execute();
+  
     this.formRef.current.resetFields();
     const ocurrences = Proxy.getAllOcurrences();
     this.setState({ ocurrences });
   };
-
+  
   handleRemoveOcurrence = (ocurrence) => {
     const deleteOcurrenceCommand = CommandFactory.createDeleteOcurrenceCommand(ocurrence);
-    Proxy.executeCommand(deleteOcurrenceCommand);
+    deleteOcurrenceCommand.execute();
+  
     const ocurrences = Proxy.getAllOcurrences();
     this.setState({ ocurrences });
   };
+  
 
   handleList(role, ocurrences){
 
