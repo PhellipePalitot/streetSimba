@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Input, Button, DatePicker, TimePicker, List, Popconfirm } from "antd";
-//import Proxy from "../facade/Proxy";
 import Proxy from "../proxy/proxy"
 import CommandFactory from "../../services/commandFactoryService";
 
