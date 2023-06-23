@@ -1,35 +1,32 @@
-export default class UserAuthAdapter {
-  constructor(controller) {
-    this.controller = controller;
+import AdminVisitor from "../Visitor/AdminVisitor";
+import UserVisitor from "../Visitor/UserVisitor";
+import controllerFacade from "../views/facade/controllerFacade";
+
+class UserAuthAdapter {
+  constructor() {
+    this.controllerFacade = controllerFacade;
   }
 
   async signIn(login, senha, tipo) {
-    // Aqui, vamos utilizar o Visitor para chamar o método correto do controller com base no tipo
-    const signInVisitor = {
-      admin: () => this.controller.signInAdmin(login, senha, tipo),
-      user: () => this.controller.signInUser(login, senha),
-    };
-
-    const signInMethod = signInVisitor[tipo];
-    if (signInMethod) {
-      return signInMethod();
-    } else {
-      throw new Error("Tipo de usuário inválido");
-    }
+    const visitor = this.createVisitor(tipo);
+    return visitor.signIn(login, senha);
   }
 
   async addUser(login, senha, tipo) {
-    // Aqui, vamos utilizar o Visitor para chamar o método correto do controller com base no tipo
-    const addUserVisitor = {
-      admin: () => this.controller.addAdmin(login, senha, tipo),
-      user: () => this.controller.addUser(login, senha),
-    };
+    const visitor = this.createVisitor(tipo);
+    return visitor.addUser(login, senha);
+  }
 
-    const addUserMethod = addUserVisitor[tipo];
-    if (addUserMethod) {
-      return addUserMethod();
-    } else {
-      throw new Error("Tipo de usuário inválido");
+  createVisitor(tipo) {
+    switch (tipo) {
+      case "admin":
+        return new AdminVisitor(this.controllerFacade);
+      case "user":
+        return new UserVisitor(this.controllerFacade);
+      default:
+        throw new Error(`Tipo de usuário inválido: ${tipo}`);
     }
   }
 }
+
+export default new UserAuthAdapter();

@@ -5,6 +5,10 @@ class User {
       this.tipo = tipo;
       this.logged = logged;
     }
+
+    accept(visitor) {
+      visitor.visit(this);
+    }
   }
 
 export default User;

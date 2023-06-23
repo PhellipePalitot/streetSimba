@@ -1,9 +1,9 @@
 import { notification } from "antd";
-import userService from "../services/userService.js";
+import adminService from "../services/adminService.js";
 
 class AdminController {
   signInAdmin(login, senha) {
-    const verificaErro = userService.validarLogin(login) || userService.validarSenha(senha);
+    const verificaErro = adminService.validarLogin(login) || adminService.validarSenha(senha);
 
     if (verificaErro) {
       notification.error({
@@ -13,7 +13,7 @@ class AdminController {
       return "error";
     }
 
-    const result = userService.signIn(login, senha, "admin");
+    const result = adminService.signIn(login, senha, "admin");
     if (result !== "Você ainda não é cadastrado(a)!") {
       console.info("Login");
       notification.info({
@@ -25,7 +25,7 @@ class AdminController {
   }
 
   addAdmin(login, senha) {
-    const verificaErro = userService.validarLogin(login) || userService.validarSenha(senha);
+    const verificaErro = adminService.validarLogin(login) || adminService.validarSenha(senha);
 
     if (verificaErro) {
       // Exibe a notificação de erro na tela
@@ -41,11 +41,11 @@ class AdminController {
       description: "Cadastro realizado com sucesso",
     });
 
-    userService.addUser(login, senha, "admin");
+    adminService.addUser(login, senha, "admin");
   }
 
   getAllAdmins() {
-    return userService.getAllUsers().filter((user) => user.tipo === "admin");
+    return adminService.getAllUsers().filter((user) => user.tipo === "admin");
   }
 }
 

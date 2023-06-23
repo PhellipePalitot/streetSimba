@@ -1,9 +1,8 @@
 import React from "react";
 import { Form, Input, Button, Select, Row } from "antd";
-import ControllerFacade from "../facade/controllerFacade";
-import logo from "../../logo.png";
 import UserAuthAdapter from "../../services/UserAuthAdapterService";
 import AbstractLayout from "../template/abstractLayout";
+import logo from "../../logo.png";
 
 const { Option } = Select;
 
@@ -11,7 +10,7 @@ class LoginForm extends AbstractLayout {
   constructor(props) {
     super(props);
     this.state = { login: "", senha: "", tipo: "user", loggedIn: false };
-    this.userAuthAdapter = new UserAuthAdapter(ControllerFacade);
+    this.userAuthAdapter = UserAuthAdapter;
   }
 
   handleLoginChange = (event) => {
