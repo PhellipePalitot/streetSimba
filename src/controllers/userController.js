@@ -40,7 +40,7 @@ class UserController {
 
     notification.info({
       message: 'Cadastro com Sucesso',
-      description: "Cadastro realiado com sucesso",
+      description: "Cadastro realizado com sucesso",
     });
 
     userService.addUser(login, senha, tipo);

@@ -10,10 +10,22 @@ const { Title, Paragraph } = Typography;
 
 class WelcomePage extends AbstractLayout {
 
+  
+  redirectTo = (url)=>{
+
+    localStorage.clear()
+    window.location.href = url;
+  }
+
+  handlingClick = (event) =>{
+   
+    this.redirectTo("/");
+  }
+
   renderHeader(){
     const items = [
       {label: "Nome do usuário", key: "item-1", icon: <UserOutlined />,
-       children: [{ label: 'Meu perfil', key: 'submenu-item-1' }, { label: 'Preferências', key: 'submenu-item-2' },{ label: 'Sair', key: 'submenu-item-1' }]},
+       children: [{ label: 'Meu perfil', key: 'submenu-item-1' }, { label: 'Preferências', key: 'submenu-item-2' },{ label: 'Sair', key: 'submenu-item-1', onClick: this.handlingClick }]},
       {label: "Minhas ocorrências", key: "item-2"},
       {label: "Sugestões", key: "item-3"}
   

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Form, Input, Button, Select, Row } from "antd";
 import ControllerFacade from "../facade/controllerFacade";
 import logo from "../../logo.png";
@@ -36,6 +36,9 @@ class LoginForm extends AbstractLayout {
 
     if (validarLogin === "logado") {
       this.setState({ loggedIn: true });
+
+      localStorage.setItem('user', login);
+      localStorage.setItem('role', tipo);
     }
   };
 

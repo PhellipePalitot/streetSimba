@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button, DatePicker, TimePicker, List, Popconfirm } from "antd";
-import ControllerFacade from "../facade/controllerFacade";
+//import Proxy from "../facade/Proxy";
+import Proxy from "../proxy/proxy"
 import CommandFactory from "../../services/commandFactoryService";
 
 const { TextArea } = Input;
@@ -15,18 +16,65 @@ class OcurrenceForm extends Component {
   handleAddOcurrence = (values) => {
     const { autor, local, horario, data, descricao } = values;
     const addOcurrenceCommand = CommandFactory.createAddOcurrenceCommand(autor, local, horario.format("HH:mm"), data.format("YYYY-MM-DD"), descricao);
-    ControllerFacade.executeCommand(addOcurrenceCommand);
+    Proxy.executeCommand(addOcurrenceCommand);
     this.formRef.current.resetFields();
-    const ocurrences = ControllerFacade.getAllOcurrences();
+    const ocurrences = Proxy.getAllOcurrences();
     this.setState({ ocurrences });
   };
 
   handleRemoveOcurrence = (ocurrence) => {
     const deleteOcurrenceCommand = CommandFactory.createDeleteOcurrenceCommand(ocurrence);
-    ControllerFacade.executeCommand(deleteOcurrenceCommand);
-    const ocurrences = ControllerFacade.getAllOcurrences();
+    Proxy.executeCommand(deleteOcurrenceCommand);
+    const ocurrences = Proxy.getAllOcurrences();
     this.setState({ ocurrences });
   };
+
+  handleList(role, ocurrences){
+
+    if(role === "admin"){
+      return (
+        <List>
+          {ocurrences.map((ocur, index) => (
+            <List.Item key={index}>
+              Autor: {ocur.autor} - Ocorrência: {ocur.descricao} - Local: {ocur.local} - Data: {ocur.data} - Horário: {ocur.horario}
+              <Popconfirm
+                title="Tem certeza que deseja excluir esta ocorrência?"
+                onConfirm={() => this.handleRemoveOcurrence(ocur)}
+                okText="Sim"
+                cancelText="Não"
+              >
+                <Button type="link" danger>
+                  Excluir
+                </Button>
+              </Popconfirm>
+            </List.Item>
+          ))}
+        </List>
+      )
+    }else {
+      return (
+        <List>
+          {ocurrences.map((ocur, index) => (
+            <List.Item key={index}>
+              Ocorrência: {ocur.descricao} - Local: {ocur.local} - Data: {ocur.data} - Horário: {ocur.horario}
+              <Popconfirm
+                title="Tem certeza que deseja excluir esta ocorrência?"
+                onConfirm={() => this.handleRemoveOcurrence(ocur)}
+                okText="Sim"
+                cancelText="Não"
+              >
+                <Button type="link" danger>
+                  Excluir
+                </Button>
+              </Popconfirm>
+            </List.Item>
+          ))}
+        </List>
+      )
+    }
+
+    
+  }
 
   render() {
     const { ocurrences } = this.state;
@@ -58,23 +106,7 @@ class OcurrenceForm extends Component {
 
         <hr />
         <h2>Lista de Ocorrências:</h2>
-        <List>
-          {ocurrences.map((ocur, index) => (
-            <List.Item key={index}>
-              Autor: {ocur.autor} - Ocorrência: {ocur.descricao} - Local: {ocur.local} - Data: {ocur.data} - Horário: {ocur.horario}
-              <Popconfirm
-                title="Tem certeza que deseja excluir esta ocorrência?"
-                onConfirm={() => this.handleRemoveOcurrence(ocur)}
-                okText="Sim"
-                cancelText="Não"
-              >
-                <Button type="link" danger>
-                  Excluir
-                </Button>
-              </Popconfirm>
-            </List.Item>
-          ))}
-        </List>
+        {this.handleList(localStorage.getItem("role"), ocurrences)}
       </div>
     );
   }
